@@ -1,3 +1,4 @@
+#!/bin/sh
 
 # For Unix (OSX and Linux)
 
