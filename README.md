@@ -21,7 +21,7 @@ The project and its architecture are described by our paper [Towards Intelligent
 	
 ### Usage
 
-The active defense tools are configured using an `adarch.conf` file with JSON format.
+The active defense tools are configured using an `adarch.conf` file with JSON format. Example:
 
 	{
 		"tool_1": {
@@ -39,14 +39,14 @@ The active defense tools are configured using an `adarch.conf` file with JSON fo
 		}
 	}
 	
-Inside the `test` directory, for each os distribution, there is a Dockerfile configuration to test `ADARCH` (for the moment only the Linux version is provided).
+Inside the `test` directory, for each supported OS distribution, there is a `Dockerfile` to test `ADARCH` (for the moment there is only the Linux version).
 
-**In order to test ADARCH inside a Docker container**: 
+**In order to test ADARCH using a Docker container**: 
 
 * **put** inside `test/adarch` the compiled binary, the tools and the configuration file
 * **build** Docker Image `docker build -t adarch .`
 * **parse** AppArmor rules `apparmor_parser -r -W docker-network`
-* **run** the container container `docker run --rm -it -p 4444:4444 -p 5000:5000 --security-opt apparmor=docker-network adarch`
+* **run** the container `docker run --rm -it -p 4444:4444 -p 5000:5000 --security-opt apparmor=docker-network adarch`
 
 ### License
 
