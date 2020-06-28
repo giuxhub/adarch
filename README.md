@@ -18,7 +18,36 @@ The project and its architecture are described by our paper [Towards Intelligent
 ### Installing
 
     An easy-to-use CMakeLists.txt is provided.
-    
+	
+### Usage
+
+The active defense tools are configured using an `adarch.conf` file with JSON format.
+
+	{
+		"tool_1": {
+			"file": "Portspoof",
+			"class": "Portspoof",
+			"method": "start",
+			"ports": [4444]
+		}
+
+		"tool_2": {
+			"file": "Tcprooter",
+			"class": "Tcprooter",
+			"method": "start",
+			"ports": [5000]
+		}
+	}
+	
+Inside the `test` directory, for each os distribution, there is a Dockerfile configuration to test `ADARCH` (for the moment only the Linux version is provided).
+
+**In order to test ADARCH inside a Docker container**: 
+
+* **put** inside `test/adarch` the compiled binary, the tools and the configuration file
+* **build** Docker Image `docker build -t adarch .`
+* **parse** AppArmor rules `apparmor_parser -r -W docker-network`
+* **run** the container container `docker run --rm -it -p 4444:4444 -p 5000:5000 --security-opt apparmor=docker-network adarch`
+
 ### License
 
 `ADARCH` was made with ♥ and it is released under the GPL 3 license.
